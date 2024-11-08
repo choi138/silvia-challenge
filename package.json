@@ -1,12 +1,15 @@
 {
   "name": "silvia-challenge",
   "version": "1.0.0",
+  "license": "MIT",
   "main": "expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx,json}\" --fix --cache",
+    "format": "prettier \"**/*.{js,jsx,ts,tsx,json}\" --write"
   },
   "dependencies": {
     "expo": "~51.0.28",
@@ -16,8 +19,25 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@eslint/compat": "^1.2.2",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.14.0",
     "@types/react": "~18.2.45",
-    "typescript": "^5.1.3"
+    "babel-plugin-module-resolver": "^5.0.2",
+    "eslint": "^9.14.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-native": "^4.1.0",
+    "globals": "^15.12.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.1.3",
+    "typescript-eslint": "^8.13.0"
   },
-  "private": true
+  "private": true,
+  "packageManager": "yarn@4.1.0",
+  "author": "n ghtcjm <84369321+choi138@users.noreply.github.com>"
 }

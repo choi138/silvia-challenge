@@ -1,4 +1,4 @@
 export type RootStackParams = {
   Main: undefined;
-  inspection: undefined;
+  Inspection: undefined;
 };

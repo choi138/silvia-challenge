@@ -3,10 +3,12 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faFileLines, faHouse } from '@fortawesome/free-solid-svg-icons';
 
 import { HomeScreen } from 'src/screens/home';
 import { BottomTabParams } from 'src/types/bottomTabsParams.type';
+import { DescriptionScreen } from 'src/screens/description';
+import { colors } from 'src/styles';
 
 const BottomTab = createBottomTabNavigator<BottomTabParams>();
 
@@ -33,12 +35,24 @@ export const MainTabs: React.FC = () => {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
+        tabBarStyle: {
+          backgroundColor: colors.background,
+        },
+        tabBarLabelStyle: {
+          paddingTop: 4,
+          fontSize: 12,
+        },
       }}
     >
       <BottomTab.Screen
         name="Home"
         component={HomeScreen}
         options={getScreenOptions('홈', faHouse)}
+      />
+      <BottomTab.Screen
+        name="Description"
+        component={DescriptionScreen}
+        options={getScreenOptions('설명', faFileLines)}
       />
     </BottomTab.Navigator>
   );

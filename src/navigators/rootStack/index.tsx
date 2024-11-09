@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { RootStackParams } from 'src/types/stackParams.types';
+import { colors } from 'src/styles';
 
 import { MainTabs } from '../mainTabs';
 
@@ -15,6 +16,7 @@ export const RootStack: React.FC = () => {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
+          cardStyle: { backgroundColor: colors.background },
         }}
       >
         <Stack.Screen name="Main" component={MainTabs} />

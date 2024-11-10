@@ -2,26 +2,18 @@ import React from 'react';
 import { Image, SafeAreaView } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { GAME_LIST, GameItem } from 'src/constant/gameList';
+import { GAME_LIST } from 'src/constant/gameList';
 import { Card, Header, Text } from 'src/components';
 import { useNavigate } from 'src/hooks';
 import { RootStackParams } from 'src/types';
+import { chunk } from 'src/utils';
 
 import * as S from './styled';
 
 export const HomeScreen: React.FC = () => {
   const { navigate } = useNavigate();
 
-  /**  게임 목록을 n개씩 나눠주는 함수 */
-  const chunkArray = (arr: GameItem[], size: number) => {
-    const chunks = [];
-    for (let i = 0; i < arr.length; i += size) {
-      chunks.push(arr.slice(i, i + size));
-    }
-    return chunks;
-  };
-
-  const gameRows = chunkArray(GAME_LIST, 2);
+  const gameRows = chunk(GAME_LIST, 2);
 
   /** 클릭시 해당 페이지로 이동하는 함수 */
   const onPressNavigate = (url?: keyof RootStackParams) => {

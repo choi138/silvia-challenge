@@ -3,12 +3,12 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faFileLines, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faClockRotateLeft, faHouse } from '@fortawesome/free-solid-svg-icons';
 
 import { HomeScreen } from 'src/screens/home';
 import { BottomTabParams } from 'src/types/bottomTabsParams.type';
-import { DescriptionScreen } from 'src/screens/description';
 import { colors } from 'src/styles';
+import { HistoryScreen } from 'src/screens';
 
 const BottomTab = createBottomTabNavigator<BottomTabParams>();
 
@@ -32,9 +32,11 @@ export const MainTabs: React.FC = () => {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Home"
+      initialRouteName="History"
       screenOptions={{
         headerShown: false,
+        tabBarActiveTintColor: colors.black,
+        tabBarInactiveTintColor: colors.gray,
         tabBarStyle: {
           backgroundColor: colors.background,
         },
@@ -50,9 +52,9 @@ export const MainTabs: React.FC = () => {
         options={getScreenOptions('홈', faHouse)}
       />
       <BottomTab.Screen
-        name="Description"
-        component={DescriptionScreen}
-        options={getScreenOptions('설명', faFileLines)}
+        name="History"
+        component={HistoryScreen}
+        options={getScreenOptions('기록', faClockRotateLeft)}
       />
     </BottomTab.Navigator>
   );

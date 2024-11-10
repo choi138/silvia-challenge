@@ -1,16 +1,19 @@
 import React from 'react';
+import { SafeAreaViewProps } from 'react-native-safe-area-context';
 
 import { Button, GoBackIcon } from 'src/components/common';
 import { TimerHeader } from 'src/components/common/TimerHeader';
 
 import * as S from './styled';
 
-export interface PageLayoutProps {
+export interface PageLayoutCustomProps {
   children: React.ReactNode;
   button?: { text: string; onPress: () => void };
   hasGoBackIcon?: boolean;
   time?: string;
 }
+
+export type PageLayoutProps = PageLayoutCustomProps & SafeAreaViewProps;
 
 /**
  * 페이지의 레이아웃을 구성합니다
@@ -23,9 +26,10 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
   hasGoBackIcon = true,
   time,
   button,
+  ...props
 }) => {
   return (
-    <S.PageLayoutContainer>
+    <S.PageLayoutContainer {...props}>
       {hasGoBackIcon && <GoBackIcon />}
       {time !== undefined && <TimerHeader time={time} />}
       {children}

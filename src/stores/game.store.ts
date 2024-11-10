@@ -256,16 +256,3 @@ export const useGameStore = create<CurrentGameStore>((set) => ({
   newGame: () => set({ game: GameStore.createGame() }),
   updateGame: (game) => set({ game }),
 }));
-
-export interface GameHistoryStore {
-  histories: GameStore[];
-  addHistory: (game: GameStore) => void;
-  resetHistory: () => void;
-}
-
-/** 게임 히스토리 스토어 */
-export const useGameHistoryStore = create<GameHistoryStore>((set) => ({
-  histories: [],
-  addHistory: (game) => set((state) => ({ histories: [...state.histories, game] })),
-  resetHistory: () => set({ histories: [] }),
-}));

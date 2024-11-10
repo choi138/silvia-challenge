@@ -30,7 +30,7 @@ export type CircleProps = CircleCustomProps & TouchableOpacityProps;
 
 const CircleElement: React.FC<CircleProps> = ({ top, left, img, opened = true, ...props }) => {
   return (
-    <S.CirclePositionWrapper top={top} left={left} {...props}>
+    <S.CirclePositionWrapper top={top} left={left} {...props} activeOpacity={0.8}>
       {opened ? (
         <S.CircleWrapper hasImage>
           <Image source={img} style={{ width: '100%', height: '100%' }} />

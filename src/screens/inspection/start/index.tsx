@@ -16,7 +16,7 @@ export const InspectionStartScreen: React.FC = () => {
   const { newGame } = useGameStore();
 
   /**
-   * 메인 화면으로 이동합니다
+   * 검사 메인 화면으로 이동합니다
    */
   const onPressGoToInspectionMainScreen = () => {
     newGame();

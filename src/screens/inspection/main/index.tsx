@@ -24,7 +24,6 @@ export const InspectionMainScreen: React.FC = () => {
   const { game } = useGameStore();
 
   if (!game) {
-    console.log('게임 없음');
     navigate('InspectionStart');
     return null;
   }

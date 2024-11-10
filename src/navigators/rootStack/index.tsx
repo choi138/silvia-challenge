@@ -8,9 +8,9 @@ import {
   InspectionMainScreen,
   InspectionRoundDoneScreen,
   InspectionStartScreen,
-} from 'src/screens/inspection';
+  InspectionDoneScreen,
+} from 'src/screens';
 import { RootStackParams } from 'src/types';
-import { InspectionDoneScreen } from 'src/screens/inspection/done';
 
 import { MainTabs } from '../mainTabs';
 
@@ -28,7 +28,7 @@ export const RootStack: React.FC = () => {
           headerShown: false,
           cardStyle: { backgroundColor: colors.background },
         }}
-        initialRouteName="InspectionRoundDone"
+        initialRouteName="Main"
       >
         <Stack.Screen name="Main" component={MainTabs} />
         <Stack.Screen name="InspectionStart" component={InspectionStartScreen} />

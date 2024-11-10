@@ -42,7 +42,7 @@ export class GameStage {
     this.reactionTime = props.reactionTime;
   }
 
-  static createStage(props: { answerIndex?: number } = {}): GameStage {
+  static createStage(props: { answerIndex?: number }): GameStage {
     return new GameStage({
       answerIndex:
         props.answerIndex ?? imagePresets[Math.floor(Math.random() * (imagePresets.length - 1))].id,
@@ -73,7 +73,7 @@ export class GameRound {
     return this.stages[this.currentStageIndex];
   }
 
-  /** 현재 이미지 */
+  /** 현재 스테이지 이미지 */
   get currentImage(): GameImage {
     return this.images[this.currentStage.answerIndex];
   }
@@ -132,6 +132,7 @@ export class GameRound {
     const imageIndexes = images.map((_, index) => index);
     const stages: GameStage[] = [];
 
+    /** 이미지 인덱스를 무작위로 섞어 스테이지의 정답 인덱스를 생성 */
     while (imageIndexes.length) {
       const answerIndex = imageIndexes.splice(
         Math.floor(Math.random() * (imageIndexes.length - 1)),
@@ -190,6 +191,11 @@ export class GameStore {
   /** 평균 반응 시간 */
   get avgReactionTime(): number {
     return this.rounds.reduce((acc, round) => acc + round.avgReactionTime, 0) / GAME_ROUND_COUNT;
+  }
+
+  /** 라운드별 반응 시간 리스트 */
+  get reactionTimeList(): number[] {
+    return this.rounds.map((round) => round.avgReactionTime);
   }
 
   /** 게임 점수 */

@@ -19,6 +19,8 @@ export const GameMainScreen: React.FC = () => {
   const [isFirstShown, setIsFirstShown] = useState(true);
   const [isAnswerShownCount, setIsAnswerShownCount] = useState(2);
   const [startedTime, setStartedTime] = useState(new Date());
+  const [solvingTime, setSolvingTime] = useState(0);
+
   const { initNavigate } = useNavigate();
 
   const { game } = useGameStore();
@@ -37,36 +39,9 @@ export const GameMainScreen: React.FC = () => {
     })),
   );
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (isAnswerShownCount <= 0) {
-        return;
-      }
-      setIsAnswerShownCount((prev) => prev - 1);
-
-      if (isAnswerShownCount <= 1) {
-        if (isFirstShown) {
-          setIsFirstShown(false);
-        }
-
-        if (game.currentStage.userChoiceIndex !== undefined) {
-          if (game.currentRound.nextStage()) {
-          } else {
-            initNavigate(
-              game.rounds.length - (game.currentRoundIndex + 1) ? 'GameRoundDone' : 'GameDone',
-            );
-          }
-        }
-
-        setStartedTime(new Date());
-      }
-    }, 1000);
-  }, [isAnswerShownCount]);
-
   const onPressCircle = (index: number) => {
     if (isAnswerShownCount > 0 || game.currentStage.userChoiceIndex !== undefined) return;
 
-    // 2초 동안 누른 원의 사진을 보여줍니다
     game.currentStage.userChoiceIndex = index;
     game.currentStage.reactionTime = (new Date().getTime() - startedTime.getTime()) / 1000;
 
@@ -97,8 +72,47 @@ export const GameMainScreen: React.FC = () => {
         />
       ));
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (isAnswerShownCount <= 0) {
+        return;
+      }
+      setIsAnswerShownCount((prev) => prev - 1);
+
+      if (isAnswerShownCount <= 1) {
+        if (isFirstShown) {
+          setIsFirstShown(false);
+        }
+
+        if (game.currentStage.userChoiceIndex !== undefined) {
+          if (game.currentRound.nextStage()) {
+          } else {
+            initNavigate(
+              game.rounds.length - (game.currentRoundIndex + 1) ? 'GameRoundDone' : 'GameDone',
+            );
+          }
+        }
+
+        setStartedTime(new Date());
+      }
+    }, 1000);
+
+    /**  isAnswerShownCount가 0이 되면 1초마다 setSolvingTime을 1씩 증가 */
+    if (isAnswerShownCount === 0) {
+      const timer = setInterval(() => {
+        setSolvingTime((prev) => prev + 1);
+      }, 1000);
+      return () => clearInterval(timer);
+    } else {
+      setSolvingTime(0);
+    }
+  }, [isAnswerShownCount]);
+
   return (
-    <PageLayout hasGoBackIcon={false} time={formatTime(isAnswerShownCount)}>
+    <PageLayout
+      hasGoBackIcon={false}
+      time={formatTime(isAnswerShownCount > 0 ? isAnswerShownCount : solvingTime)}
+    >
       <S.GameMainContainer>
         <Text size={30} fonts="bold">
           아래 그림과 동일한 것을{'\n'}

@@ -1,2 +1,2 @@
 export * from './bottomTabsParams.type';
-export * from './stackParams.types';
+export * from './stackParams';

@@ -18,6 +18,15 @@ export interface TextCustomProps {
 
 export type TextComponentProps = TextCustomProps & TextProps;
 
+/**
+ * 텍스트 컴포넌트
+ * @param children 텍스트 내용
+ * @param size 텍스트 크기
+ * @param fonts 텍스트 폰트
+ * @param variants 텍스트 색상
+ * @param align 텍스트 정렬
+ * @param onPress 텍스트 클릭시 발생할 이벤트
+ */
 export const Text: React.FC<TextComponentProps> = ({
   children,
   size = 14,

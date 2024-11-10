@@ -7,5 +7,7 @@ export const colors = {
   primary: {
     default: '#282828',
   },
-  circle: '#4a4a4a',
+  border: 'rgba(0, 0, 0, 0.15)',
+  circle: '#7C7C7C',
+  circleBorder: '#B7B7B7',
 };

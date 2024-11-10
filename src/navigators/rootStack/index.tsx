@@ -3,9 +3,9 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { RootStackParams } from 'src/types/stackParams.types';
 import { colors } from 'src/styles';
-import { InspectionScreen } from 'src/screens/inspection';
+import { InspectionMainScreen, InspectionStartScreen } from 'src/screens/inspection';
+import { RootStackParams } from 'src/types';
 
 import { MainTabs } from '../mainTabs';
 
@@ -23,10 +23,11 @@ export const RootStack: React.FC = () => {
           headerShown: false,
           cardStyle: { backgroundColor: colors.background },
         }}
-        initialRouteName="Inspection"
+        initialRouteName="InspectionStart"
       >
         <Stack.Screen name="Main" component={MainTabs} />
-        <Stack.Screen name="Inspection" component={InspectionScreen} />
+        <Stack.Screen name="InspectionStart" component={InspectionStartScreen} />
+        <Stack.Screen name="InspectionMain" component={InspectionMainScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

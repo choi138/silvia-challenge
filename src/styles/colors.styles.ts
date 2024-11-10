@@ -8,6 +8,10 @@ export const colors = {
   primary: {
     default: '#282828',
   },
+  tag: {
+    safe: '#6066F3',
+    danger: '#F35A4C',
+  },
   border: 'rgba(0, 0, 0, 0.15)',
   circle: '#7C7C7C',
   circleBorder: '#B7B7B7',

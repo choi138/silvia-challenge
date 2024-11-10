@@ -6,7 +6,7 @@ import { CarrotPNG, ChessPNG, FeatherPNG, GamesPNG, PizzaPNG, UmbrellaPNG } from
 import { shuffleArray } from 'src/utils/suffle';
 
 export const GAME_STAGE_COUNT = 6;
-export const GAME_ROUND_COUNT = 3;
+export const GAME_ROUND_COUNT = 2;
 
 export class GameImage {
   src: ImageSourcePropType;
@@ -17,6 +17,7 @@ export class GameImage {
     this.id = props.id;
   }
 
+  /** 랜덤 이미지 생성 */
   static createImage(): GameImage {
     return imagePresets[Math.floor(Math.random() * (imagePresets.length - 1))];
   }

@@ -11,6 +11,9 @@ const variants: Record<FontVariants, ReactNativeStyle> = {
   white: css`
     color: ${colors.text.white};
   `,
+  gray: css`
+    color: ${colors.text.gray};
+  `,
 };
 
 const aligns: Record<FontAlign, ReactNativeStyle> = {
@@ -28,18 +31,23 @@ const aligns: Record<FontAlign, ReactNativeStyle> = {
 const fontFamily: Record<FontFamily, ReactNativeStyle> = {
   bold: css`
     font-family: SpoqaHanSansNeo-Bold;
+    font-weight: 900;
   `,
   medium: css`
     font-family: SpoqaHanSansNeo-Medium;
+    font-weight: 700;
   `,
   regular: css`
     font-family: SpoqaHanSansNeo-Regular;
+    font-weight: 400;
   `,
   light: css`
     font-family: SpoqaHanSansNeo-Light;
+    font-weight: 300;
   `,
   thin: css`
     font-family: SpoqaHanSansNeo-Thin;
+    font-weight: 100;
   `,
 };
 

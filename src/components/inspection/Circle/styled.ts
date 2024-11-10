@@ -18,13 +18,9 @@ export const CircleRow = styled.View`
 export const CirclePositionWrapper = styled.TouchableOpacity<{
   top: number;
   left: number;
-  right: number;
-  bottom: number;
 }>`
   ${({ top }) => top && `top: ${top}px;`}
   ${({ left }) => left && `left: ${left}px;`}
-    ${({ right }) => right && `right: ${right}px;`}
-    ${({ bottom }) => bottom && `bottom: ${bottom}px;`}
 `;
 
 export const CircleWrapper = styled.View<{ hasImage?: boolean }>`

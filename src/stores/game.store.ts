@@ -5,6 +5,9 @@ import { create } from 'zustand';
 import { CarrotPNG, ChessPNG, FeatherPNG, GamesPNG, PizzaPNG, UmbrellaPNG } from 'src/assets';
 import { shuffleArray } from 'src/utils/suffle';
 
+export const GAME_STAGE_COUNT = 6;
+export const GAME_ROUND_COUNT = 3;
+
 export class GameImage {
   src: ImageSourcePropType;
   id: number;
@@ -31,9 +34,6 @@ const imagePresets: GameImage[] = [
   new GameImage({ src: PizzaPNG, id: 5 }),
   new GameImage({ src: GamesPNG, id: 6 }),
 ];
-
-export const gameStageCount = 6;
-export const gameRoundCount = 7;
 
 export class GameStage {
   answerIndex: number;
@@ -64,7 +64,7 @@ export class GameRound {
    * @returns 다음 스테이지로 이동 가능 여부
    */
   nextStage(): boolean {
-    if (this.currentStageIndex < gameStageCount - 1) {
+    if (this.currentStageIndex < GAME_STAGE_COUNT - 1) {
       this.currentStageIndex += 1;
       return true;
     }
@@ -86,7 +86,7 @@ export class GameRound {
   get accuracy(): number {
     return (
       this.stages.filter((stage) => stage.answerIndex === stage.userChoiceIndex).length /
-      gameStageCount
+      GAME_STAGE_COUNT
     );
   }
 
@@ -97,7 +97,7 @@ export class GameRound {
 
   /** 평균 반응 시간 */
   get avgReactionTime(): number {
-    return this.totalTime / gameStageCount;
+    return this.totalTime / GAME_STAGE_COUNT;
   }
 
   /** 게임 점수 */
@@ -116,12 +116,12 @@ export class GameRound {
   }
 
   constructor(props: { images: GameImage[]; stages: GameStage[]; currentStageIndex: number }) {
-    if (props.images.length !== gameStageCount) {
-      throw new Error(`게임 이미지는 ${gameStageCount}개여야 합니다.`);
+    if (props.images.length !== GAME_STAGE_COUNT) {
+      throw new Error(`게임 이미지는 ${GAME_STAGE_COUNT}개여야 합니다.`);
     }
 
-    if (props.stages.length !== gameStageCount) {
-      throw new Error(`게임 스테이지는 ${gameStageCount}개여야 합니다.`);
+    if (props.stages.length !== GAME_STAGE_COUNT) {
+      throw new Error(`게임 스테이지는 ${GAME_STAGE_COUNT}개여야 합니다.`);
     }
 
     this.images = props.images;
@@ -130,7 +130,7 @@ export class GameRound {
   }
 
   static createRound(): GameRound {
-    const images = GameImage.createImages(gameStageCount);
+    const images = GameImage.createImages(GAME_STAGE_COUNT);
 
     // 각기 다른 이미지를 사용하여 스테이지를 생성
     const imageIndexes = images.map((_, index) => index);
@@ -161,14 +161,24 @@ export class GameStore {
     return this.rounds[this.currentRoundIndex];
   }
 
+  /** 이전 라운드 */
+  get prevRound(): GameRound | undefined {
+    return this.rounds[this.currentRoundIndex - 1];
+  }
+
   /** 현재 스테이지 */
   get currentStage(): GameStage {
     return this.currentRound.currentStage;
   }
 
+  /** 이전 스테이지 */
+  get prevStage(): GameStage | undefined {
+    return this.currentRound.stages[this.currentRound.currentStageIndex - 1];
+  }
+
   /** 평균 정확도 */
   get accuracy(): number {
-    return this.rounds.reduce((acc, round) => acc + round.accuracy, 0) / gameRoundCount;
+    return this.rounds.reduce((acc, round) => acc + round.accuracy, 0) / GAME_ROUND_COUNT;
   }
 
   /** 총 소요 시간 */
@@ -178,17 +188,17 @@ export class GameStore {
 
   /** 평균 소요 시간 */
   get avgTime(): number {
-    return this.totalTime / gameRoundCount;
+    return this.totalTime / GAME_ROUND_COUNT;
   }
 
   /** 평균 반응 시간 */
   get avgReactionTime(): number {
-    return this.rounds.reduce((acc, round) => acc + round.avgReactionTime, 0) / gameRoundCount;
+    return this.rounds.reduce((acc, round) => acc + round.avgReactionTime, 0) / GAME_ROUND_COUNT;
   }
 
   /** 게임 점수 */
   get score(): number {
-    return this.rounds.reduce((acc, round) => acc + round.score, 0) / gameRoundCount;
+    return this.rounds.reduce((acc, round) => acc + round.score, 0) / GAME_ROUND_COUNT;
   }
 
   /**
@@ -196,7 +206,7 @@ export class GameStore {
    * @returns 다음 라운드로 이동 가능 여부
    */
   nextRound(): boolean {
-    if (this.currentRoundIndex < gameRoundCount - 1) {
+    if (this.currentRoundIndex < GAME_ROUND_COUNT - 1) {
       this.currentRoundIndex += 1;
       return true;
     }
@@ -217,8 +227,8 @@ export class GameStore {
   }
 
   constructor(props: { rounds: GameRound[]; currentRoundIndex: number }) {
-    if (props.rounds.length !== gameRoundCount) {
-      throw new Error(`게임 라운드는 ${gameRoundCount}개여야 합니다.`);
+    if (props.rounds.length !== GAME_ROUND_COUNT) {
+      throw new Error(`게임 라운드는 ${GAME_ROUND_COUNT}개여야 합니다.`);
     }
 
     this.rounds = props.rounds;
@@ -227,7 +237,7 @@ export class GameStore {
 
   static createGame(): GameStore {
     return new GameStore({
-      rounds: Array.from({ length: gameRoundCount }, () => GameRound.createRound()),
+      rounds: Array.from({ length: GAME_ROUND_COUNT }, () => GameRound.createRound()),
       currentRoundIndex: 0,
     });
   }
@@ -236,7 +246,6 @@ export class GameStore {
 export interface CurrentGameStore {
   game?: GameStore;
   newGame: () => void;
-  resetGame: () => void;
   updateGame: (game: GameStore) => void;
 }
 
@@ -244,7 +253,6 @@ export interface CurrentGameStore {
 export const useGameStore = create<CurrentGameStore>((set) => ({
   game: undefined,
   newGame: () => set({ game: GameStore.createGame() }),
-  resetGame: () => set({ game: undefined }),
   updateGame: (game) => set({ game }),
 }));
 

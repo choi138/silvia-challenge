@@ -3,6 +3,7 @@ export const colors = {
   text: {
     default: '#111111',
     white: '#ffffff',
+    gray: '#737373',
   },
   primary: {
     default: '#282828',

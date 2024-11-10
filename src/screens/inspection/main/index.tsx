@@ -4,14 +4,13 @@ import { Image } from 'react-native';
 import { Circle, PageLayout, Text } from 'src/components';
 import { GameImage, useGameStore } from 'src/stores';
 import { useNavigate } from 'src/hooks';
+import { formatTime } from 'src/utils/formatTime';
 
 import * as S from './styled';
 
 export interface CircleStateProp {
   top: number;
   left: number;
-  right: number;
-  bottom: number;
   image: GameImage;
   index: number;
 }
@@ -25,16 +24,15 @@ export const InspectionMainScreen: React.FC = () => {
   const { game } = useGameStore();
 
   if (!game) {
+    console.log('게임 없음');
     navigate('InspectionStart');
     return null;
   }
 
   const [circles] = useState<CircleStateProp[]>(
     game.currentRound.images.map((image, index) => ({
-      top: Math.floor(Math.random() * 40),
-      left: Math.floor(Math.random() * 40),
-      right: Math.floor(Math.random() * 40),
-      bottom: Math.floor(Math.random() * 40),
+      top: Math.floor(Math.random() * 60),
+      left: Math.max(0, Math.floor(Math.random() * 60) - 35),
       image: image,
       index: index,
     })),
@@ -45,35 +43,37 @@ export const InspectionMainScreen: React.FC = () => {
       if (isAnswerShownCount <= 0) {
         return;
       }
-      setIsAnswerShownCount((prev) => {
-        if (prev <= 1) {
-          if (isFirstShown) {
-            setIsFirstShown(false);
-          }
+      setIsAnswerShownCount((prev) => prev - 1);
 
-          if (game.currentStage.userChoiceIndex !== undefined) {
-            if (game.currentRound.nextStage()) {
-            } else {
-              navigate('InspectionRoundDone');
-            }
-          }
-
-          setStartedTime(new Date());
+      if (isAnswerShownCount <= 1) {
+        if (isFirstShown) {
+          setIsFirstShown(false);
         }
 
-        return prev - 1;
-      });
+        if (game.currentStage.userChoiceIndex !== undefined) {
+          if (game.currentRound.nextStage()) {
+          } else {
+            navigate(
+              game.rounds.length - (game.currentRoundIndex + 1)
+                ? 'InspectionRoundDone'
+                : 'InspectionDone',
+            );
+          }
+        }
+
+        setStartedTime(new Date());
+      }
     }, 1000);
   }, [isAnswerShownCount]);
 
-  const onCirclePress = (index: number) => {
+  const onPressCircle = (index: number) => {
     if (isAnswerShownCount > 0 || game.currentStage.userChoiceIndex !== undefined) return;
 
     // 2초 동안 누른 원의 사진을 보여줍니다
     game.currentStage.userChoiceIndex = index;
     game.currentStage.reactionTime = (new Date().getTime() - startedTime.getTime()) / 1000;
 
-    setIsAnswerShownCount(2);
+    setIsAnswerShownCount(1);
   };
 
   /**
@@ -88,26 +88,24 @@ export const InspectionMainScreen: React.FC = () => {
       .map((circle) => (
         <Circle
           key={circle.index}
-          right={circle.right}
           left={circle.left}
           top={circle.top}
-          bottom={circle.bottom}
           img={circle.image.src}
           opened={
             isAnswerShownCount > 0 &&
             (game.currentStage.userChoiceIndex === undefined ||
               game.currentStage.userChoiceIndex === circle.index)
           }
-          onPress={() => onCirclePress(circle.index)}
+          onPress={() => onPressCircle(circle.index)}
         />
       ));
 
   return (
-    <PageLayout>
+    <PageLayout hasGoBackIcon={false} time={formatTime(isAnswerShownCount)}>
       <S.InspectionMainContainer>
         <Text size={30} fonts="bold">
           아래 그림과 동일한 것을{'\n'}
-          찾아보세요! {isAnswerShownCount}
+          찾아보세요!
         </Text>
         <S.InspectionMainImageWrapper>
           {(!isFirstShown || isAnswerShownCount <= 0) && (

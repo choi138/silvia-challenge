@@ -22,25 +22,15 @@ const CircleRow: React.FC<CircleRowProps> = ({ children }) => {
 export interface CircleCustomProps {
   top: number;
   left: number;
-  right: number;
-  bottom: number;
   img: ImageSourcePropType;
   opened: boolean;
 }
 
 export type CircleProps = CircleCustomProps & TouchableOpacityProps;
 
-const CircleElement: React.FC<CircleProps> = ({
-  top,
-  left,
-  right,
-  bottom,
-  img,
-  opened = true,
-  ...props
-}) => {
+const CircleElement: React.FC<CircleProps> = ({ top, left, img, opened = true, ...props }) => {
   return (
-    <S.CirclePositionWrapper top={top} left={left} right={right} bottom={bottom} {...props}>
+    <S.CirclePositionWrapper top={top} left={left} {...props}>
       {opened ? (
         <S.CircleWrapper hasImage>
           <Image source={img} style={{ width: '100%', height: '100%' }} />

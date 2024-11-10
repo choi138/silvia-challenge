@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Button, GoBackIcon } from 'src/components/common';
+import { TimerHeader } from 'src/components/common/TimerHeader';
 
 import * as S from './styled';
 
@@ -8,6 +9,7 @@ export interface PageLayoutProps {
   children: React.ReactNode;
   button?: { text: string; onPress: () => void };
   hasGoBackIcon?: boolean;
+  time?: string;
 }
 
 /**
@@ -19,11 +21,13 @@ export interface PageLayoutProps {
 export const PageLayout: React.FC<PageLayoutProps> = ({
   children,
   hasGoBackIcon = true,
+  time,
   button,
 }) => {
   return (
     <S.PageLayoutContainer>
       {hasGoBackIcon && <GoBackIcon />}
+      {time !== undefined && <TimerHeader time={time} />}
       {children}
       {button && <Button onPress={button.onPress}>{button.text}</Button>}
     </S.PageLayoutContainer>

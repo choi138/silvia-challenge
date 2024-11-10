@@ -8,18 +8,16 @@ import { BrainGIF } from 'src/assets';
 import { useGameStore } from 'src/stores';
 import { useNavigate } from 'src/hooks';
 import { Tag } from 'src/components/common/Tag';
+import { STORAGE_GAME_HISTORY_KEY } from 'src/constant/keys';
 
 import * as S from './styled';
 
-/** 검사 결과를 저장하는 스토리의 키 */
-export const STORAGE_INSPECTION_DATA_KEY = 'inspection-data';
-
-export const InspectionDoneScreen: React.FC = () => {
+export const GameDoneScreen: React.FC = () => {
   const { game } = useGameStore();
   const { navigate } = useNavigate();
 
   if (!game) {
-    navigate('InspectionStart');
+    navigate('GameStart');
     return null;
   }
 
@@ -32,11 +30,11 @@ export const InspectionDoneScreen: React.FC = () => {
 
   /** 검사 결과를 스토리지에 저장합니다 */
   const onPressSaveData = async () => {
-    const data = await AsyncStorage.getItem(STORAGE_INSPECTION_DATA_KEY);
+    const data = await AsyncStorage.getItem(STORAGE_GAME_HISTORY_KEY);
     const parsedData = data ? JSON.parse(data) : [];
 
     await AsyncStorage.setItem(
-      STORAGE_INSPECTION_DATA_KEY,
+      STORAGE_GAME_HISTORY_KEY,
       JSON.stringify([
         ...parsedData,
         {
@@ -55,7 +53,7 @@ export const InspectionDoneScreen: React.FC = () => {
 
   return (
     <PageLayout>
-      <S.InspectionDoneContainer>
+      <S.GameDoneContainer>
         <Image source={BrainGIF} style={{ width: 160, height: 160 }} />
         <Text size={30} fonts="bold">
           검사가 끝났어요!
@@ -63,7 +61,7 @@ export const InspectionDoneScreen: React.FC = () => {
         <Text size={20} fonts="regular">
           정확도 {accuracy}% / 평균 {avgReactionTime}초
         </Text>
-        <S.InspectionDoneResultTextContainer>
+        <S.GameResultTextContainer>
           <Text size={20} fonts="regular">
             결과는
           </Text>
@@ -71,8 +69,8 @@ export const InspectionDoneScreen: React.FC = () => {
           <Text size={20} fonts="regular">
             입니다.
           </Text>
-        </S.InspectionDoneResultTextContainer>
-      </S.InspectionDoneContainer>
+        </S.GameResultTextContainer>
+      </S.GameDoneContainer>
       <Button onPress={onPressSaveData}>저장하기</Button>
     </PageLayout>
   );

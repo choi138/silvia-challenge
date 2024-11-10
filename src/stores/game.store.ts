@@ -17,11 +17,6 @@ export class GameImage {
     this.id = props.id;
   }
 
-  /** 랜덤 이미지 생성 */
-  static createImage(): GameImage {
-    return imagePresets[Math.floor(Math.random() * (imagePresets.length - 1))];
-  }
-
   static createImages(count: number): GameImage[] {
     return shuffleArray([...imagePresets]).slice(0, count);
   }

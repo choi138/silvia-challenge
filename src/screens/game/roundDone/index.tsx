@@ -8,12 +8,12 @@ import { useNavigate } from 'src/hooks';
 
 import * as S from './styled';
 
-export const InspectionRoundDoneScreen: React.FC = () => {
+export const GameRoundDoneScreen: React.FC = () => {
   const { game } = useGameStore();
   const { navigate } = useNavigate();
 
   if (!game) {
-    navigate('InspectionStart');
+    navigate('GameStart');
     return null;
   }
 
@@ -24,15 +24,15 @@ export const InspectionRoundDoneScreen: React.FC = () => {
 
   const onPressNextRound = () => {
     if (game.nextRound()) {
-      navigate('InspectionMain');
+      navigate('GameMain');
     } else {
-      navigate('InspectionDone');
+      navigate('GameDone');
     }
   };
 
   return (
     <PageLayout>
-      <S.RoundDoneContainer>
+      <S.GameRoundDoneContainer>
         <Image source={ClappingHandsGIF} style={{ width: 160, height: 160 }} />
         <Text size={30} fonts="bold">
           잘 하셨습니다!
@@ -44,13 +44,13 @@ export const InspectionRoundDoneScreen: React.FC = () => {
               : `이전 기록보다 ${prevRoundTimeDiff.toFixed(1)}초 빨랐어요.`
             : `${game?.currentRound.avgReactionTime.toFixed(1)}초 걸렸어요.`}
         </Text>
-      </S.RoundDoneContainer>
-      <S.RoundDoneButtonContainer>
+      </S.GameRoundDoneContainer>
+      <S.GameRoundDoneButtonContainer>
         <Button onPress={onPressNextRound}>다음 라운드</Button>
         <Text size={14} fonts="regular" variants="gray">
           {roundLeft > 1 ? `${roundLeft} 라운드 남았어요.` : '마지막 라운드에요.'}
         </Text>
-      </S.RoundDoneButtonContainer>
+      </S.GameRoundDoneButtonContainer>
     </PageLayout>
   );
 };

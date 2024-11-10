@@ -44,4 +44,7 @@ const CircleElement: React.FC<CircleProps> = ({ top, left, img, opened = true, .
   );
 };
 
-export const Circle = Object.assign(CircleElement, { Container: CircleContainer, Row: CircleRow });
+export const GameCircle = Object.assign(CircleElement, {
+  Container: CircleContainer,
+  Row: CircleRow,
+});

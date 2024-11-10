@@ -4,12 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { colors } from 'src/styles';
-import {
-  InspectionMainScreen,
-  InspectionRoundDoneScreen,
-  InspectionStartScreen,
-  InspectionDoneScreen,
-} from 'src/screens';
+import { GameMainScreen, GameRoundDoneScreen, GameStartScreen, GameDoneScreen } from 'src/screens';
 import { RootStackParams } from 'src/types';
 
 import { MainTabs } from '../mainTabs';
@@ -31,10 +26,10 @@ export const RootStack: React.FC = () => {
         initialRouteName="Main"
       >
         <Stack.Screen name="Main" component={MainTabs} />
-        <Stack.Screen name="InspectionStart" component={InspectionStartScreen} />
-        <Stack.Screen name="InspectionMain" component={InspectionMainScreen} />
-        <Stack.Screen name="InspectionRoundDone" component={InspectionRoundDoneScreen} />
-        <Stack.Screen name="InspectionDone" component={InspectionDoneScreen} />
+        <Stack.Screen name="GameStart" component={GameStartScreen} />
+        <Stack.Screen name="GameMain" component={GameMainScreen} />
+        <Stack.Screen name="GameRoundDone" component={GameRoundDoneScreen} />
+        <Stack.Screen name="GameDone" component={GameDoneScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

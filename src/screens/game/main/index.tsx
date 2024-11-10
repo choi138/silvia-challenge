@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Image } from 'react-native';
 
-import { Circle, PageLayout, Text } from 'src/components';
+import { GameCircle, PageLayout, Text } from 'src/components';
 import { GameImage, useGameStore } from 'src/stores';
 import { useNavigate } from 'src/hooks';
 import { formatTime } from 'src/utils/formatTime';
@@ -15,7 +15,7 @@ export interface CircleStateProp {
   index: number;
 }
 
-export const InspectionMainScreen: React.FC = () => {
+export const GameMainScreen: React.FC = () => {
   const [isFirstShown, setIsFirstShown] = useState(true);
   const [isAnswerShownCount, setIsAnswerShownCount] = useState(2);
   const [startedTime, setStartedTime] = useState(new Date());
@@ -24,7 +24,7 @@ export const InspectionMainScreen: React.FC = () => {
   const { game } = useGameStore();
 
   if (!game) {
-    navigate('InspectionStart');
+    navigate('GameStart');
     return null;
   }
 
@@ -53,9 +53,7 @@ export const InspectionMainScreen: React.FC = () => {
           if (game.currentRound.nextStage()) {
           } else {
             navigate(
-              game.rounds.length - (game.currentRoundIndex + 1)
-                ? 'InspectionRoundDone'
-                : 'InspectionDone',
+              game.rounds.length - (game.currentRoundIndex + 1) ? 'GameRoundDone' : 'GameDone',
             );
           }
         }
@@ -85,7 +83,7 @@ export const InspectionMainScreen: React.FC = () => {
     circles
       .slice(start, end)
       .map((circle) => (
-        <Circle
+        <GameCircle
           key={circle.index}
           left={circle.left}
           top={circle.top}
@@ -101,26 +99,26 @@ export const InspectionMainScreen: React.FC = () => {
 
   return (
     <PageLayout hasGoBackIcon={false} time={formatTime(isAnswerShownCount)}>
-      <S.InspectionMainContainer>
+      <S.GameMainContainer>
         <Text size={30} fonts="bold">
           아래 그림과 동일한 것을{'\n'}
           찾아보세요!
         </Text>
-        <S.InspectionMainImageWrapper>
+        <S.GameMainImageWrapper>
           {(!isFirstShown || isAnswerShownCount <= 0) && (
             <Image
               source={game.currentRound.currentImage.src}
               style={{ width: '100%', height: '100%' }}
             />
           )}
-        </S.InspectionMainImageWrapper>
-        <Circle.Container>
-          <Circle.Row>{renderCircles(0, 2)}</Circle.Row>
-          <Circle.Row>{renderCircles(2, 3)}</Circle.Row>
-          <Circle.Row>{renderCircles(3, 5)}</Circle.Row>
-          <Circle.Row>{renderCircles(5, 6)}</Circle.Row>
-        </Circle.Container>
-      </S.InspectionMainContainer>
+        </S.GameMainImageWrapper>
+        <GameCircle.Container>
+          <GameCircle.Row>{renderCircles(0, 2)}</GameCircle.Row>
+          <GameCircle.Row>{renderCircles(2, 3)}</GameCircle.Row>
+          <GameCircle.Row>{renderCircles(3, 5)}</GameCircle.Row>
+          <GameCircle.Row>{renderCircles(5, 6)}</GameCircle.Row>
+        </GameCircle.Container>
+      </S.GameMainContainer>
     </PageLayout>
   );
 };

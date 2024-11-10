@@ -11,27 +11,27 @@ import * as S from './styled';
 /**
  * 검사 화면
  */
-export const InspectionStartScreen: React.FC = () => {
+export const GameStartScreen: React.FC = () => {
   const { navigate } = useNavigate();
   const { newGame } = useGameStore();
 
   /**
    * 검사 메인 화면으로 이동합니다
    */
-  const onPressGoToInspectionMainScreen = () => {
+  const onPressGoToGameMainScreen = () => {
     newGame();
-    navigate('InspectionMain');
+    navigate('GameMain');
   };
 
   return (
-    <PageLayout button={{ text: '검사 시작', onPress: onPressGoToInspectionMainScreen }}>
-      <S.InspectionStartContentContainer>
+    <PageLayout button={{ text: '검사 시작', onPress: onPressGoToGameMainScreen }}>
+      <S.GameStartContentContainer>
         <Image source={StartGamePng} style={{ width: 140, height: 140 }} />
         <Text size={30} fonts="bold">
           같은 그림 찾기 게임{'\n'}
           시작하기
         </Text>
-      </S.InspectionStartContentContainer>
+      </S.GameStartContentContainer>
     </PageLayout>
   );
 };

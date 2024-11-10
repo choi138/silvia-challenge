@@ -5,40 +5,30 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { ProgressBar, Tag, Text } from 'src/components';
-import { GameRound } from 'src/stores';
-
-import { STORAGE_INSPECTION_DATA_KEY } from '../inspection';
+import { GameHistoryStorageProps } from 'src/types';
+import { STORAGE_GAME_HISTORY_KEY } from 'src/constant/keys';
 
 import * as S from './styled';
 
-export interface HistoryStateProps {
-  score: number;
-  accuracy: number;
-  avgReactionTime: number;
-  rounds: GameRound[];
-  totalTime: number;
-  createdAt: string;
-}
-
 export const HistoryScreen: React.FC = () => {
-  const [history, setHistory] = useState<HistoryStateProps[]>([]);
+  const [histories, setHistories] = useState<GameHistoryStorageProps[]>([]);
 
   /** 스토리지에 저장되어 있는 기록을 가져옵니다 */
-  const getInspectionHistory = async () => {
-    const history = await AsyncStorage.getItem(STORAGE_INSPECTION_DATA_KEY);
+  const getGameHistory = async () => {
+    const storageData = await AsyncStorage.getItem(STORAGE_GAME_HISTORY_KEY);
 
-    setHistory(history ? JSON.parse(history) : []);
+    setHistories(storageData ? JSON.parse(storageData) : []);
   };
 
   useEffect(() => {
-    getInspectionHistory();
+    getGameHistory();
   }, []);
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['top']}>
-      {history ? (
+      {histories ? (
         <FlatList
-          data={history}
+          data={histories}
           style={{ width: '100%' }}
           ListHeaderComponent={
             <S.Header>

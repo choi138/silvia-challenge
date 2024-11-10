@@ -1,5 +1,6 @@
-import { InspectionStackParamList } from './inspection.type';
+import { GameStackParamList } from './game.type';
 
-export type RootStackParams = InspectionStackParamList & {
+export type RootStackParams = GameStackParamList & {
   Main: undefined;
+  History: undefined;
 };

@@ -2,13 +2,13 @@ import styled from '@emotion/native';
 
 import { colors } from 'src/styles';
 
-export const InspectionMainContainer = styled.View`
+export const GameMainContainer = styled.View`
   flex: 1;
   row-gap: 40px;
   align-items: center;
 `;
 
-export const InspectionMainImageWrapper = styled.View`
+export const GameMainImageWrapper = styled.View`
   width: 140px;
   height: 140px;
   padding: 20px;

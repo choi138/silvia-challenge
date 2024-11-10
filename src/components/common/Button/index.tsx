@@ -35,7 +35,7 @@ const Button = React.forwardRef<TouchableOpacity, ButtonProps>(
         {...props}
         activeOpacity={0.8}
       >
-        <Text variants="white" size={16}>
+        <Text color="white" size={16}>
           {props.children}
         </Text>
       </S.ButtonElement>

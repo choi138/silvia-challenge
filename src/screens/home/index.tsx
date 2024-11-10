@@ -1,35 +1,61 @@
 import React from 'react';
+import { Image, SafeAreaView } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import { GAME_LIST, GameItem } from 'src/constant/gameList';
+import { Card, Header, Text } from 'src/components';
+import { useNavigate } from 'src/hooks';
+import { RootStackParams } from 'src/types';
 
 import * as S from './styled';
 
 export const HomeScreen: React.FC = () => {
+  const { navigate } = useNavigate();
+
+  /**  게임 목록을 n개씩 나눠주는 함수 */
+  const chunkArray = (arr: GameItem[], size: number) => {
+    const chunks = [];
+    for (let i = 0; i < arr.length; i += size) {
+      chunks.push(arr.slice(i, i + size));
+    }
+    return chunks;
+  };
+
+  const gameRows = chunkArray(GAME_LIST, 2);
+
+  /** 클릭시 해당 페이지로 이동하는 함수 */
+  const onPressNavigate = (url?: keyof RootStackParams) => {
+    if (!url) return;
+    navigate(url);
+  };
+
   return (
-    <S.HomeScreenContainer>
-      <S.Row>
-        <S.OffsetCircleWrapper offset={{ bottom: 20, right: 20 }}>
-          <S.Circle />
-        </S.OffsetCircleWrapper>
-        <S.CircleWrapper>
-          <S.Circle />
-        </S.CircleWrapper>
-      </S.Row>
-      <S.Row isMiddle>
-        <S.CircleWrapper>
-          <S.Circle />
-        </S.CircleWrapper>
-        <S.Square />
-        <S.CircleWrapper>
-          <S.Circle />
-        </S.CircleWrapper>
-      </S.Row>
-      <S.Row>
-        <S.CircleWrapper>
-          <S.Circle />
-        </S.CircleWrapper>
-        <S.OffsetCircleWrapper offset={{ top: 20, left: 20 }}>
-          <S.Circle />
-        </S.OffsetCircleWrapper>
-      </S.Row>
-    </S.HomeScreenContainer>
+    <SafeAreaView style={{ flex: 1 }}>
+      <S.HomeContainer>
+        <Header title="👋 안녕하세요 근원님!" subtitle="어떤 종류의 인지 검사를 하고싶은가요?" />
+        <Card.Column>
+          {gameRows.map((row, rowIndex) => (
+            <Card.Row key={rowIndex}>
+              {row.map((game) => (
+                <Card width={48} key={game.title}>
+                  <TouchableOpacity
+                    onPress={() => onPressNavigate(game.linkTo)}
+                    activeOpacity={0.6}
+                  >
+                    <S.CardContentContainer>
+                      <Image source={game.gif} style={{ width: 60, height: 60 }} />
+                      <Text size={17}>{game.title}</Text>
+                      <Text size={15} color="link">
+                        {game.description}
+                      </Text>
+                    </S.CardContentContainer>
+                  </TouchableOpacity>
+                </Card>
+              ))}
+            </Card.Row>
+          ))}
+        </Card.Column>
+      </S.HomeContainer>
+    </SafeAreaView>
   );
 };

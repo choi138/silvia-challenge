@@ -5,10 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faClockRotateLeft, faHouse } from '@fortawesome/free-solid-svg-icons';
 
-import { HomeScreen } from 'src/screens/home';
 import { BottomTabParams } from 'src/types/bottomTabsParams.type';
 import { colors } from 'src/styles';
-import { HistoryScreen } from 'src/screens';
+import { HistoryScreen, HomeScreen } from 'src/screens';
 
 const BottomTab = createBottomTabNavigator<BottomTabParams>();
 
@@ -32,7 +31,6 @@ export const MainTabs: React.FC = () => {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="History"
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: colors.black,
@@ -45,6 +43,7 @@ export const MainTabs: React.FC = () => {
           fontSize: 12,
         },
       }}
+      initialRouteName="Home"
     >
       <BottomTab.Screen
         name="Home"

@@ -2,9 +2,9 @@ import styled, { css, ReactNativeStyle } from '@emotion/native';
 
 import { colors } from 'src/styles';
 
-import { FontAlign, FontFamily, FontVariants, TextCustomProps } from '.';
+import { FontAlign, FontFamily, FontColor, TextCustomProps } from '.';
 
-const variants: Record<FontVariants, ReactNativeStyle> = {
+const variants: Record<FontColor, ReactNativeStyle> = {
   default: css`
     color: ${colors.text.default};
   `,
@@ -13,6 +13,9 @@ const variants: Record<FontVariants, ReactNativeStyle> = {
   `,
   gray: css`
     color: ${colors.text.gray};
+  `,
+  link: css`
+    color: ${colors.text.link};
   `,
 };
 
@@ -55,6 +58,6 @@ export const TextElement = styled.Text<Required<TextCustomProps>>`
   font-size: ${(props) => props.size.toString()}px;
 
   ${(props) => aligns[props.align]}
-  ${(props) => variants[props.variants]}
+  ${(props) => variants[props.color]}
   ${(props) => fontFamily[props.fonts]}
 `;

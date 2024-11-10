@@ -1,12 +1,23 @@
-import { useNavigation } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 
 import { RootStackParams } from 'src/types';
 
 export const useNavigate = () => {
-  const navigate = useNavigation().navigate as unknown as (
+  const navigation = useNavigation();
+
+  const navigate = navigation.navigate as unknown as (
     screen: keyof RootStackParams,
     params?: RootStackParams[keyof RootStackParams],
   ) => void;
 
-  return { navigate };
+  const initNavigate = (name: string) => {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: name }],
+      }),
+    );
+  };
+
+  return { navigate, initNavigate };
 };

@@ -6,6 +6,7 @@ export const colors = {
     default: '#111111',
     white: '#ffffff',
     gray: '#737373',
+    link: '#6066F3',
   },
   primary: {
     default: '#282828',

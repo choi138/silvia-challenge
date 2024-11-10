@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-native';
 
-import { StartGamePng } from 'src/assets/images';
+import { StartGamePNG } from 'src/assets/images';
 import { useNavigate } from 'src/hooks';
 import { PageLayout, Text } from 'src/components';
 import { useGameStore } from 'src/stores';
@@ -26,7 +26,7 @@ export const GameStartScreen: React.FC = () => {
   return (
     <PageLayout button={{ text: '검사 시작', onPress: onPressGoToGameMainScreen }}>
       <S.GameStartContentContainer>
-        <Image source={StartGamePng} style={{ width: 140, height: 140 }} />
+        <Image source={StartGamePNG} style={{ width: 140, height: 140 }} />
         <Text size={30} fonts="bold">
           같은 그림 찾기 게임{'\n'}
           시작하기

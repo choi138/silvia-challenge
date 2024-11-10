@@ -10,7 +10,7 @@ import * as S from './styled';
 
 export const GameRoundDoneScreen: React.FC = () => {
   const { game } = useGameStore();
-  const { navigate } = useNavigate();
+  const { navigate, initNavigate } = useNavigate();
 
   if (!game) {
     navigate('GameStart');
@@ -26,18 +26,18 @@ export const GameRoundDoneScreen: React.FC = () => {
     if (game.nextRound()) {
       navigate('GameMain');
     } else {
-      navigate('GameDone');
+      initNavigate('GameDone');
     }
   };
 
   return (
-    <PageLayout>
+    <PageLayout hasGoBackIcon={false}>
       <S.GameRoundDoneContainer>
         <Image source={ClappingHandsGIF} style={{ width: 160, height: 160 }} />
         <Text size={30} fonts="bold">
           잘 하셨습니다!
         </Text>
-        <Text size={20} fonts="regular" variants="gray">
+        <Text size={20} fonts="regular" color="gray">
           {game.prevRound
             ? prevRoundTimeDiff < 0
               ? `이전 기록보다 ${-prevRoundTimeDiff.toFixed(1)}초 늦어졌어요.`
@@ -47,7 +47,7 @@ export const GameRoundDoneScreen: React.FC = () => {
       </S.GameRoundDoneContainer>
       <S.GameRoundDoneButtonContainer>
         <Button onPress={onPressNextRound}>다음 라운드</Button>
-        <Text size={14} fonts="regular" variants="gray">
+        <Text size={14} fonts="regular" color="gray">
           {roundLeft > 1 ? `${roundLeft} 라운드 남았어요.` : '마지막 라운드에요.'}
         </Text>
       </S.GameRoundDoneButtonContainer>

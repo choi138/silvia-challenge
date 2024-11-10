@@ -19,12 +19,12 @@ export const GameMainScreen: React.FC = () => {
   const [isFirstShown, setIsFirstShown] = useState(true);
   const [isAnswerShownCount, setIsAnswerShownCount] = useState(2);
   const [startedTime, setStartedTime] = useState(new Date());
-  const { navigate } = useNavigate();
+  const { initNavigate } = useNavigate();
 
   const { game } = useGameStore();
 
   if (!game) {
-    navigate('GameStart');
+    initNavigate('GameStart');
     return null;
   }
 
@@ -52,7 +52,7 @@ export const GameMainScreen: React.FC = () => {
         if (game.currentStage.userChoiceIndex !== undefined) {
           if (game.currentRound.nextStage()) {
           } else {
-            navigate(
+            initNavigate(
               game.rounds.length - (game.currentRoundIndex + 1) ? 'GameRoundDone' : 'GameDone',
             );
           }

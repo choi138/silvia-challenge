@@ -14,10 +14,10 @@ import * as S from './styled';
 
 export const GameDoneScreen: React.FC = () => {
   const { game } = useGameStore();
-  const { navigate } = useNavigate();
+  const { navigate, initNavigate } = useNavigate();
 
   if (!game) {
-    navigate('GameStart');
+    initNavigate('GameStart');
     return null;
   }
 
@@ -47,12 +47,11 @@ export const GameDoneScreen: React.FC = () => {
         },
       ]),
     );
-
-    navigate('History');
+    navigate('Main');
   };
 
   return (
-    <PageLayout>
+    <PageLayout hasGoBackIcon={false}>
       <S.GameDoneContainer>
         <Image source={BrainGIF} style={{ width: 160, height: 160 }} />
         <Text size={30} fonts="bold">

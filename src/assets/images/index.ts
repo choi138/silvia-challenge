@@ -1,1 +1,1 @@
-export { default as StartGamePng } from './startGame.png';
+export { default as StartGamePNG } from './startGame.png';

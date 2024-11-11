@@ -17,6 +17,7 @@ import * as S from './styled';
 export const HistoryScreen: React.FC = () => {
   const { open, close } = useModal();
   const insets = useSafeAreaInsets();
+  const [isLoading, setIsLoading] = useState(true);
   const [histories, setHistories] = useState<GameHistoryStorageProps[]>([]);
 
   /** 스토리지에 저장되어 있는 기록을 가져옵니다 */
@@ -28,6 +29,8 @@ export const HistoryScreen: React.FC = () => {
 
   useEffect(() => {
     getGameHistory();
+    /** getGameHistory의 데이터 값이 불러오기 전에 렌더링 되는것을 방지하기 위함입니다. */
+    setTimeout(() => setIsLoading(false), 100);
   }, []);
 
   return (
@@ -87,7 +90,7 @@ export const HistoryScreen: React.FC = () => {
         )}
         keyExtractor={(item) => item.createdAt}
       />
-      {histories.length === 0 && (
+      {!isLoading && histories.length === 0 && (
         <S.HistoryNotFoundContainer>
           <Image source={SadGIF} style={{ width: 140, height: 140 }} />
           <Text size={24} font="bold">

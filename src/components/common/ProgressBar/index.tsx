@@ -16,7 +16,11 @@ export interface ProgressBarCustomProps {
 export type ProgressBarProps = ProgressBarCustomProps & ViewProps;
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({ progress, text, variant }) => {
-  const getFlexValue = () => (variant === 'accuracy' ? progress / 100 : progress / 8);
+  /**
+   * 프로그레스바의 flex 값을 계산합니다
+   * 최대: 1, 최저: 0,
+   */
+  const getFlexValue = () => (variant === 'accuracy' ? progress / 100 : (8 - progress) / 7.9);
 
   return (
     <S.ProgressBarContainer>

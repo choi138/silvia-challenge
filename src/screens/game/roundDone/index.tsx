@@ -32,15 +32,15 @@ export const GameRoundDoneScreen: React.FC = () => {
 
   const getMessage = () => {
     if (game.prevRound) {
-      if (prevRoundTimeDiff < 0) {
-        return `이전 기록보다 ${-prevRoundTimeDiff.toFixed(1)}초 늦어졌어요.`;
-      } else if (Math.abs(prevRoundTimeDiff) <= 0.01) {
+      if (Math.abs(prevRoundTimeDiff) <= 0.01) {
         return `이전 기록과 같은 시간이에요.`;
+      } else if (prevRoundTimeDiff < 0) {
+        return `이전 기록보다 ${-prevRoundTimeDiff.toFixed(1)}초 늦어졌어요.`;
       } else {
         return `이전 기록보다 ${prevRoundTimeDiff.toFixed(1)}초 빨랐어요.`;
       }
     } else {
-      return `${game.currentRound.avgReactionTime.toFixed(1)}초 걸렸어요.`;
+      return `${game.currentRound.totalTime.toFixed(1)}초 걸렸어요.`;
     }
   };
 

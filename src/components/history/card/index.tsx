@@ -12,6 +12,13 @@ export type HistoryCardProps = GameHistoryStorageProps &
     date: Date;
   };
 
+/**
+ * 기록 탭에서 사용하는 카드 컴포넌트
+ * @param date 날짜
+ * @param accuracy 정확도
+ * @param avgReactionTime 평균 반응속도
+ * @param score 점수
+ */
 export const HistoryCard: React.FC<HistoryCardProps> = ({
   date,
   accuracy,

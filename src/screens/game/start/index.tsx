@@ -9,14 +9,14 @@ import { useGameStore } from 'src/stores';
 import * as S from './styled';
 
 /**
- * 검사 화면
+ * 게임 시작 화면
  */
 export const GameStartScreen: React.FC = () => {
   const { navigate } = useNavigate();
   const { newGame } = useGameStore();
 
   /**
-   * 검사 메인 화면으로 이동합니다
+   * 게임 메인 화면으로 이동합니다
    */
   const onPressGoToGameMainScreen = () => {
     newGame();
@@ -24,7 +24,7 @@ export const GameStartScreen: React.FC = () => {
   };
 
   return (
-    <PageLayout button={{ text: '검사 시작', onPress: onPressGoToGameMainScreen }}>
+    <PageLayout button={{ text: '게임 시작', onPress: onPressGoToGameMainScreen }}>
       <S.GameStartContentContainer>
         <Image source={StartGamePNG} style={{ width: 140, height: 140 }} />
         <Text size={30} font="bold">

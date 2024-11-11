@@ -13,10 +13,14 @@ import { Format } from 'src/utils';
 
 import * as S from './styled';
 
+/**
+ * 게임이 끝난 후 결과를 보여주는 화면
+ */
 export const GameDoneScreen: React.FC = () => {
   const { game } = useGameStore();
   const { initNavigate } = useNavigate();
 
+  /** 게임이 없다면 게임 시작 화면으로 이동합니다 */
   if (!game) {
     initNavigate('GameStart');
     return null;
@@ -31,9 +35,11 @@ export const GameDoneScreen: React.FC = () => {
 
   /** 검사 결과를 스토리지에 저장합니다 */
   const onPressSaveData = async () => {
+    /** 기존 데이터를 불러옵니다 */
     const data = await AsyncStorage.getItem(STORAGE_GAME_HISTORY_KEY);
     const parsedData = data ? JSON.parse(data) : [];
 
+    /** 불러온 데이터에 새로운 데이터를 추가합니다 */
     await AsyncStorage.setItem(
       STORAGE_GAME_HISTORY_KEY,
       JSON.stringify([
@@ -48,6 +54,8 @@ export const GameDoneScreen: React.FC = () => {
         },
       ]),
     );
+
+    /** 저장이 완료되면 메인 화면으로 이동합니다 */
     initNavigate('Main');
   };
 

@@ -24,7 +24,6 @@ export type TextComponentProps = TextCustomProps & TextProps;
  * @param fonts 텍스트 폰트
  * @param variants 텍스트 색상
  * @param align 텍스트 정렬
- * @param onPress 텍스트 클릭시 발생할 이벤트
  */
 export const Text: React.FC<TextComponentProps> = ({
   children,
@@ -32,18 +31,10 @@ export const Text: React.FC<TextComponentProps> = ({
   font: fonts = 'medium',
   color = 'default',
   align = 'center',
-  onPress,
   ...props
 }) => {
   return (
-    <S.TextElement
-      size={size}
-      font={fonts}
-      color={color}
-      align={align}
-      onPress={onPress}
-      {...props}
-    >
+    <S.TextElement size={size} font={fonts} color={color} align={align} {...props}>
       {children}
     </S.TextElement>
   );

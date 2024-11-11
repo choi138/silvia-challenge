@@ -1,4 +1,4 @@
-/**  목록을 n개씩 나눠주는 함수 */
+/**  목록을 n개씩 나눠줍니다 */
 export const chunk = <T>(arr: T[], size: number) => {
   const chunks = [];
   for (let i = 0; i < arr.length; i += size) {

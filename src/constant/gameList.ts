@@ -10,6 +10,13 @@ export interface GameItem {
   linkTo?: keyof RootStackParams;
 }
 
+/**
+ * 게임 목록
+ * @param gif 게임 이미지
+ * @param title 게임 제목
+ * @param description 게임 설명
+ * @param linkTo(선택) 페이지 이동 링크
+ */
 export const GAME_LIST: GameItem[] = [
   {
     gif: Umbrella3DPNG,

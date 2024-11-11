@@ -10,6 +10,12 @@ export interface ChartProps {
   yLabelSuffix: string;
 }
 
+/**
+ * 라인 차트 컴포넌트
+ * @param data 차트 데이터
+ * @param xLabelTexts x축 라벨 텍스트 리스트
+ * @param yLabelSuffix y축 라벨 접미사
+ */
 export const Chart: React.FC<ChartProps> = ({ data, xLabelTexts, yLabelSuffix }) => {
   const deviceWidth = Dimensions.get('window').width;
 

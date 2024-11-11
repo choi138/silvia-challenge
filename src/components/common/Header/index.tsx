@@ -9,6 +9,11 @@ export interface HeaderProps {
   subtitle: string;
 }
 
+/**
+ * 헤더 컴포넌트
+ * @param title 헤더 제목
+ * @param subtitle 헤더 부제목
+ */
 export const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
   return (
     <S.Header>

@@ -11,12 +11,16 @@ import { chunk, isAndroid } from 'src/utils';
 
 import * as S from './styled';
 
+/**
+ * 홈 화면
+ */
 export const HomeScreen: React.FC = () => {
   const { navigate } = useNavigate();
 
+  /** 게임 리스트를 2개씩 묶어서 렌더링합니다 */
   const gameRows = chunk(GAME_LIST, 2);
 
-  /** 클릭시 해당 페이지로 이동하는 함수 */
+  /** 클릭시 해당 페이지로 이동합니다 */
   const onPressNavigate = (url?: keyof RootStackParams) => {
     if (!url) return;
     navigate(url);

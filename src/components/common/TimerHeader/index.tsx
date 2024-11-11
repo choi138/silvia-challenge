@@ -9,6 +9,10 @@ export interface TimerHeaderProps {
   time: string;
 }
 
+/**
+ * 타이머 헤더 컴포넌트
+ * @param time 표시할 시간
+ */
 export const TimerHeader: React.FC<TimerHeaderProps> = ({ time }) => {
   return (
     <S.TimerHeader>

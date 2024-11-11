@@ -17,6 +17,7 @@ export class GameImage {
     this.id = props.id;
   }
 
+  /** 무작위 이미지 생성 */
   static createImages(count: number): GameImage[] {
     return shuffleArray([...imagePresets]).slice(0, count);
   }
@@ -42,6 +43,7 @@ export class GameStage {
     this.reactionTime = props.reactionTime;
   }
 
+  /** 스테이지 생성 */
   static createStage(props: { answerIndex?: number }): GameStage {
     return new GameStage({
       answerIndex:
@@ -246,6 +248,7 @@ export class GameStore {
     this.currentRoundIndex = props.currentRoundIndex;
   }
 
+  /** 게임 생성 */
   static createGame(): GameStore {
     return new GameStore({
       rounds: Array.from({ length: GAME_ROUND_COUNT }, () => GameRound.createRound()),

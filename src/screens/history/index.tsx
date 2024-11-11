@@ -14,6 +14,9 @@ import { GAME_STAGE_COUNT } from 'src/stores';
 
 import * as S from './styled';
 
+/**
+ * 게임 기록 화면
+ */
 export const HistoryScreen: React.FC = () => {
   const { open, close } = useModal();
   const insets = useSafeAreaInsets();
@@ -29,7 +32,7 @@ export const HistoryScreen: React.FC = () => {
 
   useEffect(() => {
     getGameHistory();
-    /** getGameHistory의 데이터 값이 불러오기 전에 렌더링 되는것을 방지하기 위함입니다. */
+    /** getGameHistory의 데이터 값이 불러오기 전에 렌더링 되는것을 방지하기 위하여 0.1초의 딜레이를 줍니다 */
     setTimeout(() => setIsLoading(false), 100);
   }, []);
 

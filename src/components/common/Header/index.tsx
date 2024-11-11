@@ -12,10 +12,10 @@ export interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
   return (
     <S.Header>
-      <Text size={30} fonts="bold">
+      <Text size={30} font="bold">
         {title}
       </Text>
-      <Text size={18} fonts="regular">
+      <Text size={18} font="regular">
         {subtitle}
       </Text>
     </S.Header>

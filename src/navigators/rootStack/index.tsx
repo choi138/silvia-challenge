@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { StatusBar } from 'expo-status-bar';
+
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -31,6 +33,7 @@ export const RootStack: React.FC = () => {
         <Stack.Screen name="GameRoundDone" component={GameRoundDoneScreen} />
         <Stack.Screen name="GameDone" component={GameDoneScreen} />
       </Stack.Navigator>
+      <StatusBar backgroundColor={colors.black} />
     </NavigationContainer>
   );
 };

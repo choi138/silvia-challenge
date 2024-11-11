@@ -30,24 +30,34 @@ export const GameRoundDoneScreen: React.FC = () => {
     }
   };
 
+  const getMessage = () => {
+    if (game.prevRound) {
+      if (prevRoundTimeDiff < 0) {
+        return `이전 기록보다 ${-prevRoundTimeDiff.toFixed(1)}초 늦어졌어요.`;
+      } else if (Math.abs(prevRoundTimeDiff) <= 0.01) {
+        return `이전 기록과 같은 시간이에요.`;
+      } else {
+        return `이전 기록보다 ${prevRoundTimeDiff.toFixed(1)}초 빨랐어요.`;
+      }
+    } else {
+      return `${game.currentRound.avgReactionTime.toFixed(1)}초 걸렸어요.`;
+    }
+  };
+
   return (
     <PageLayout hasGoBackIcon={false}>
       <S.GameRoundDoneContainer>
         <Image source={ClappingHandsGIF} style={{ width: 160, height: 160 }} />
-        <Text size={30} fonts="bold">
+        <Text size={30} font="bold">
           잘 하셨습니다!
         </Text>
-        <Text size={20} fonts="regular" color="gray">
-          {game.prevRound
-            ? prevRoundTimeDiff < 0
-              ? `이전 기록보다 ${-prevRoundTimeDiff.toFixed(1)}초 늦어졌어요.`
-              : `이전 기록보다 ${prevRoundTimeDiff.toFixed(1)}초 빨랐어요.`
-            : `${game?.currentRound.avgReactionTime.toFixed(1)}초 걸렸어요.`}
+        <Text size={20} font="regular" color="gray">
+          {getMessage()}
         </Text>
       </S.GameRoundDoneContainer>
       <S.GameRoundDoneButtonContainer>
         <Button onPress={onPressNextRound}>다음 라운드</Button>
-        <Text size={14} fonts="regular" color="gray">
+        <Text size={14} font="regular" color="gray">
           {roundLeft > 1 ? `${roundLeft} 라운드 남았어요.` : '마지막 라운드에요.'}
         </Text>
       </S.GameRoundDoneButtonContainer>

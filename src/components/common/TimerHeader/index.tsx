@@ -14,7 +14,7 @@ export const TimerHeader: React.FC<TimerHeaderProps> = ({ time }) => {
     <S.TimerHeader>
       <GoBackIcon />
       <S.TextWrapper>
-        <Text size={21} fonts="medium">
+        <Text size={21} font="medium">
           {time}
         </Text>
       </S.TextWrapper>

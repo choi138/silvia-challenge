@@ -22,20 +22,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      [
-        "expo-font",
-        {
-          "fonts": [
-            "./assets/fonts/SpoqaHanSansNeo-Bold.ttf",
-            "./assets/fonts/SpoqaHanSansNeo-Light.ttf",
-            "./assets/fonts/SpoqaHanSansNeo-Medium.ttf",
-            "./assets/fonts/SpoqaHanSansNeo-Regular.ttf",
-            "./assets/fonts/SpoqaHanSansNeo-Thin.ttf"
-          ]
-        }
-      ]
-    ]
+    }
   }
 }

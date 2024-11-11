@@ -7,9 +7,9 @@ export class Format {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const hours = date.getHours();
-    const period = hours > 12 ? '오후' : '오전';
-    const formattedHours = Math.ceil(hours / 12);
     const minutes = date.getMinutes();
+    const period = hours > 12 ? '오후' : '오전';
+    const formattedHours = hours > 12 ? hours - 12 : hours;
 
     return `${month}월 ${day}일 ${period} ${formattedHours}시 ${minutes}분`;
   };

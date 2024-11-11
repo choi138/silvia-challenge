@@ -114,7 +114,7 @@ export const GameMainScreen: React.FC = () => {
       time={Format.time(isAnswerShownCount > 0 ? isAnswerShownCount : solvingTime)}
     >
       <S.GameMainContainer>
-        <Text size={30} fonts="bold">
+        <Text size={30} font="bold">
           아래 그림과 동일한 것을{'\n'}
           찾아보세요!
         </Text>

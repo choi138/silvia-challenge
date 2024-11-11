@@ -1,10 +1,5 @@
 import styled from '@emotion/native';
 
-export const HistoryHeaderContainer = styled.View`
-  row-gap: 30px;
-  padding-bottom: 30px;
-`;
-
 export const HistoryNotFoundContainer = styled.View`
   height: 50%;
   flex: auto;

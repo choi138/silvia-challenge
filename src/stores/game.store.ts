@@ -6,7 +6,7 @@ import { shuffleArray } from 'src/utils/';
 import { CarrotPNG, ChessPNG, FeatherPNG, GamesPNG, PizzaPNG, UmbrellaPNG } from 'src/assets';
 
 export const GAME_STAGE_COUNT = 6;
-export const GAME_ROUND_COUNT = 2;
+export const GAME_ROUND_COUNT = 7;
 
 export class GameImage {
   src: ImageSourcePropType;

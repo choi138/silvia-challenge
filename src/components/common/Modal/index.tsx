@@ -17,7 +17,7 @@ const ModalComponent: React.FC<ModalProps> = ({ title, children, onPressButton }
     <RNModal animationType="slide" transparent={true} visible={true}>
       <S.ModalWrapper>
         <S.ModalContainer>
-          <Text size={24} fonts="bold">
+          <Text size={24} font="bold">
             {title}
           </Text>
           {children}

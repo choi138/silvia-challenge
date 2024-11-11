@@ -36,24 +36,16 @@ const aligns: Record<FontAlign, ReactNativeStyle> = {
 
 const fontFamily: Record<FontFamily, ReactNativeStyle> = {
   bold: css`
-    font-family: SpoqaHanSansNeo-Bold;
     font-weight: 900;
   `,
   medium: css`
-    font-family: SpoqaHanSansNeo-Medium;
-    font-weight: 700;
+    font-weight: 600;
   `,
   regular: css`
-    font-family: SpoqaHanSansNeo-Regular;
     font-weight: 400;
   `,
-  light: css`
-    font-family: SpoqaHanSansNeo-Light;
-    font-weight: 300;
-  `,
   thin: css`
-    font-family: SpoqaHanSansNeo-Thin;
-    font-weight: 100;
+    font-weight: 300;
   `,
 };
 
@@ -62,5 +54,5 @@ export const TextElement = styled.Text<Required<TextCustomProps>>`
 
   ${(props) => aligns[props.align]}
   ${(props) => variants[props.color]}
-  ${(props) => fontFamily[props.fonts]}
+  ${(props) => fontFamily[props.font]}
 `;

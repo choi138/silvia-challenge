@@ -21,7 +21,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ progress, text, varian
   return (
     <S.ProgressBarContainer>
       <S.ProgressBarRow>
-        <Text fonts="regular" size={15} style={{ flex: 0.5 }} align="left">
+        <Text font="regular" size={15} style={{ flex: 0.5 }} align="left">
           {text}
         </Text>
         <S.ProgressBarWrapper>
@@ -34,7 +34,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ progress, text, varian
         </S.ProgressBarWrapper>
       </S.ProgressBarRow>
       <S.ProgressBarTextWrapper>
-        <Text fonts="regular">
+        <Text font="regular">
           {progress}
           {variant === 'accuracy' ? '%' : '초'}
         </Text>

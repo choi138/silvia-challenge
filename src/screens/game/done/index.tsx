@@ -15,7 +15,7 @@ import * as S from './styled';
 
 export const GameDoneScreen: React.FC = () => {
   const { game } = useGameStore();
-  const { navigate, initNavigate } = useNavigate();
+  const { initNavigate } = useNavigate();
 
   if (!game) {
     initNavigate('GameStart');
@@ -48,7 +48,7 @@ export const GameDoneScreen: React.FC = () => {
         },
       ]),
     );
-    navigate('Main');
+    initNavigate('Main');
   };
 
   return (
@@ -56,10 +56,10 @@ export const GameDoneScreen: React.FC = () => {
       <S.GameDoneContainer>
         <S.GameResultHeaderContainer>
           <Image source={BrainGIF} style={{ width: 160, height: 160 }} />
-          <Text size={30} fonts="bold">
+          <Text size={30} font="bold">
             검사가 끝났어요!
           </Text>
-          <Text size={20} fonts="regular">
+          <Text size={20} font="regular">
             정확도 {accuracy}% / 평균 {avgReactionTime}초
           </Text>
         </S.GameResultHeaderContainer>
@@ -69,11 +69,11 @@ export const GameDoneScreen: React.FC = () => {
           yLabelSuffix="초"
         />
         <S.GameResultTextContainer>
-          <Text size={20} fonts="regular">
+          <Text size={20} font="regular">
             결과는
           </Text>
           <Tag variant={isDanger ? 'danger' : 'safe'}>{isDanger ? '위험' : '안전'}</Tag>
-          <Text size={20} fonts="regular">
+          <Text size={20} font="regular">
             입니다.
           </Text>
         </S.GameResultTextContainer>

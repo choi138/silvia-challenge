@@ -27,7 +27,7 @@ export const GameStartScreen: React.FC = () => {
     <PageLayout button={{ text: '검사 시작', onPress: onPressGoToGameMainScreen }}>
       <S.GameStartContentContainer>
         <Image source={StartGamePNG} style={{ width: 140, height: 140 }} />
-        <Text size={30} fonts="bold">
+        <Text size={30} font="bold">
           같은 그림 찾기 게임{'\n'}
           시작하기
         </Text>

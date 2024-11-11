@@ -1,17 +1,16 @@
 import { TextProps } from 'react-native';
 
 import { colors } from 'src/styles';
-import { fonts } from 'src/styles/fonts.styles';
 
 import * as S from './styled';
 
 export type FontColor = keyof (typeof colors)['text'];
 export type FontAlign = 'center' | 'left' | 'right';
-export type FontFamily = keyof typeof fonts;
+export type FontFamily = 'bold' | 'medium' | 'regular' | 'thin';
 
 export interface TextCustomProps {
   size?: number;
-  fonts?: keyof typeof fonts;
+  font?: FontFamily;
   color?: FontColor;
   align?: FontAlign;
 }
@@ -30,7 +29,7 @@ export type TextComponentProps = TextCustomProps & TextProps;
 export const Text: React.FC<TextComponentProps> = ({
   children,
   size = 14,
-  fonts = 'medium',
+  font: fonts = 'medium',
   color = 'default',
   align = 'center',
   onPress,
@@ -39,7 +38,7 @@ export const Text: React.FC<TextComponentProps> = ({
   return (
     <S.TextElement
       size={size}
-      fonts={fonts}
+      font={fonts}
       color={color}
       align={align}
       onPress={onPress}

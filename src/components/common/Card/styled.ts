@@ -2,7 +2,7 @@ import styled from '@emotion/native';
 
 import { colors } from 'src/styles';
 
-export const Card = styled.View<{ width: number }>`
+export const Card = styled.Pressable<{ width: number }>`
   width: ${({ width }) => width.toString()}%;
   border-radius: 16px;
   padding: 16px;

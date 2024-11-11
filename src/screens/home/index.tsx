@@ -1,6 +1,7 @@
 import React from 'react';
-import { Image, SafeAreaView } from 'react-native';
+import { Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { GAME_LIST } from 'src/constant/gameList';
 import { Card, Header, Text } from 'src/components';
@@ -22,7 +23,7 @@ export const HomeScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }} edges={['top']}>
       <S.HomeContainer>
         <Header title="👋 안녕하세요 근원님!" subtitle="어떤 종류의 인지 검사를 하고싶은가요?" />
         <Card.Column>

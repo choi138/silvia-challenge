@@ -24,6 +24,6 @@ export const ButtonElement = styled(TouchableOpacity)<Required<ButtonCustomProps
   text-align: center;
   border-radius: 12px;
   background-color: ${colors.button};
-
+  width: ${(props) => props.width};
   ${(props) => sizes[props.size]}
 `;

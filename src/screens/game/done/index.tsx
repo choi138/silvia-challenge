@@ -32,6 +32,7 @@ export const GameDoneScreen: React.FC = () => {
   const onPressSaveData = async () => {
     const data = await AsyncStorage.getItem(STORAGE_GAME_HISTORY_KEY);
     const parsedData = data ? JSON.parse(data) : [];
+    console.log(game.rounds[0].avgReactionTime, 'gam, rounds');
 
     await AsyncStorage.setItem(
       STORAGE_GAME_HISTORY_KEY,
@@ -43,7 +44,7 @@ export const GameDoneScreen: React.FC = () => {
           avgReactionTime: avgReactionTime,
           rounds: game.rounds,
           totalTime: game.totalTime,
-          createdAt: new Date().toISOString(),
+          createdAt: new Date(),
         },
       ]),
     );

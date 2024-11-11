@@ -8,6 +8,7 @@ import { faClockRotateLeft, faHouse } from '@fortawesome/free-solid-svg-icons';
 import { BottomTabParams } from 'src/types/bottomTabsParams.type';
 import { colors } from 'src/styles';
 import { HistoryScreen, HomeScreen } from 'src/screens';
+import { isAndroid } from 'src/utils';
 
 const BottomTab = createBottomTabNavigator<BottomTabParams>();
 
@@ -36,11 +37,15 @@ export const MainTabs: React.FC = () => {
         tabBarActiveTintColor: colors.black,
         tabBarInactiveTintColor: colors.gray,
         tabBarStyle: {
+          position: 'absolute',
           backgroundColor: colors.background,
+          paddingTop: 4,
+          paddingBottom: isAndroid ? 10 : 20,
         },
         tabBarLabelStyle: {
           paddingTop: 4,
           fontSize: 12,
+          paddingBottom: 30,
         },
       }}
       initialRouteName="Home"

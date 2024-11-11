@@ -7,3 +7,4 @@ export * from './TimerHeader';
 export * from './Header';
 export * from './Card';
 export * from './Chart';
+export * from './Modal';

@@ -1,4 +1,5 @@
 import React from 'react';
+import { PressableProps } from 'react-native';
 
 import * as S from './styled';
 
@@ -18,16 +19,22 @@ const CardRow: React.FC<CardRowProps> = ({ children }) => {
   return <S.CardRow>{children}</S.CardRow>;
 };
 
-interface CardProps {
+interface CardCustomProps {
   children: React.ReactNode;
   width?: number;
 }
 
-const CardElement: React.FC<CardProps> = ({ children, width = 100 }) => {
-  return <S.Card width={width}>{children}</S.Card>;
+type CardProps = CardCustomProps & PressableProps;
+
+const CardComponent: React.FC<CardProps> = ({ children, width = 100, ...props }) => {
+  return (
+    <S.Card width={width} {...props}>
+      {children}
+    </S.Card>
+  );
 };
 
-export const Card = Object.assign(CardElement, {
+export const Card = Object.assign(CardComponent, {
   Column: CardColumn,
   Row: CardRow,
 });

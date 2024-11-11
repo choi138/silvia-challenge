@@ -2,11 +2,11 @@ import { ImageSourcePropType } from 'react-native';
 
 import { create } from 'zustand';
 
+import { shuffleArray } from 'src/utils/';
 import { CarrotPNG, ChessPNG, FeatherPNG, GamesPNG, PizzaPNG, UmbrellaPNG } from 'src/assets';
-import { shuffleArray } from 'src/utils/suffle';
 
 export const GAME_STAGE_COUNT = 6;
-export const GAME_ROUND_COUNT = 7;
+export const GAME_ROUND_COUNT = 2;
 
 export class GameImage {
   src: ImageSourcePropType;
@@ -257,12 +257,10 @@ export class GameStore {
 export interface CurrentGameStore {
   game?: GameStore;
   newGame: () => void;
-  updateGame: (game: GameStore) => void;
 }
 
 /** 게임 스토어 */
 export const useGameStore = create<CurrentGameStore>((set) => ({
   game: undefined,
   newGame: () => set({ game: GameStore.createGame() }),
-  updateGame: (game) => set({ game }),
 }));

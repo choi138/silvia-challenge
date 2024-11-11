@@ -16,6 +16,8 @@ export interface ProgressBarCustomProps {
 export type ProgressBarProps = ProgressBarCustomProps & ViewProps;
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({ progress, text, variant }) => {
+  const getFlexValue = () => (variant === 'accuracy' ? progress / 100 : progress / 8);
+
   return (
     <S.ProgressBarContainer>
       <S.ProgressBarRow>
@@ -25,7 +27,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ progress, text, varian
         <S.ProgressBarWrapper>
           <S.ProgressBar
             style={{
-              flex: progress / 100,
+              flex: getFlexValue(),
             }}
             variant={variant}
           />

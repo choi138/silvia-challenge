@@ -28,7 +28,7 @@ export interface CircleCustomProps {
 
 export type CircleProps = CircleCustomProps & TouchableOpacityProps;
 
-const CircleElement: React.FC<CircleProps> = ({ top, left, img, opened = true, ...props }) => {
+const CircleComponent: React.FC<CircleProps> = ({ top, left, img, opened = true, ...props }) => {
   return (
     <S.CirclePositionWrapper top={top} left={left} {...props} activeOpacity={0.8}>
       {opened ? (
@@ -44,7 +44,7 @@ const CircleElement: React.FC<CircleProps> = ({ top, left, img, opened = true, .
   );
 };
 
-export const GameCircle = Object.assign(CircleElement, {
+export const GameCircle = Object.assign(CircleComponent, {
   Container: CircleContainer,
   Row: CircleRow,
 });

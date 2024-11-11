@@ -4,7 +4,7 @@ import { Image } from 'react-native';
 import { GameCircle, PageLayout, Text } from 'src/components';
 import { GameImage, useGameStore } from 'src/stores';
 import { useNavigate } from 'src/hooks';
-import { formatTime } from 'src/utils/formatTime';
+import { Format } from 'src/utils';
 
 import * as S from './styled';
 
@@ -111,7 +111,7 @@ export const GameMainScreen: React.FC = () => {
   return (
     <PageLayout
       hasGoBackIcon={false}
-      time={formatTime(isAnswerShownCount > 0 ? isAnswerShownCount : solvingTime)}
+      time={Format.time(isAnswerShownCount > 0 ? isAnswerShownCount : solvingTime)}
     >
       <S.GameMainContainer>
         <Text size={30} fonts="bold">

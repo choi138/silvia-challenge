@@ -37,15 +37,15 @@ export const MainTabs: React.FC = () => {
         tabBarActiveTintColor: colors.black,
         tabBarInactiveTintColor: colors.gray,
         tabBarStyle: {
-          position: 'absolute',
           backgroundColor: colors.background,
-          paddingTop: 4,
-          paddingBottom: isAndroid ? 10 : 20,
+          height: isAndroid ? 70 : 80,
         },
         tabBarLabelStyle: {
-          paddingTop: 4,
+          paddingTop: isAndroid ? 2 : 8,
           fontSize: 12,
-          paddingBottom: 30,
+        },
+        tabBarItemStyle: {
+          paddingTop: 4,
         },
       }}
       initialRouteName="Home"

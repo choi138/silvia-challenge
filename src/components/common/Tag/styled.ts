@@ -14,6 +14,6 @@ const variants: Record<TagVariant, ReactNativeStyle> = {
 };
 export const Tag = styled.View<TagCustomProps>`
   padding: 4px 8px;
-  border-radius: 50%;
+  border-radius: 100px;
   ${(props) => variants[props.variant]}
 `;

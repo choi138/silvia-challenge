@@ -7,7 +7,7 @@ import { GAME_LIST } from 'src/constant/gameList';
 import { Card, Header, Text } from 'src/components';
 import { useNavigate } from 'src/hooks';
 import { RootStackParams } from 'src/types';
-import { chunk } from 'src/utils';
+import { chunk, isAndroid } from 'src/utils';
 
 import * as S from './styled';
 
@@ -37,7 +37,7 @@ export const HomeScreen: React.FC = () => {
                   >
                     <S.CardContentContainer>
                       <Image source={game.gif} style={{ width: 60, height: 60 }} />
-                      <Text size={17}>{game.title}</Text>
+                      <Text size={isAndroid ? 15 : 17}>{game.title}</Text>
                       <Text size={15} color="link">
                         {game.description}
                       </Text>

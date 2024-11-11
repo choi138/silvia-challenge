@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-native';
 
-import { ClappingHandsGIF } from 'src/assets';
+import { CheerUpGIF, ClappingHandsGIF } from 'src/assets';
 import { Button, PageLayout, Text } from 'src/components';
 import { useGameStore } from 'src/stores';
 import { useNavigate } from 'src/hooks';
@@ -21,6 +21,8 @@ export const GameRoundDoneScreen: React.FC = () => {
     (game.prevRound?.avgReactionTime ?? 0) - (game.currentRound.avgReactionTime ?? 0);
 
   const roundLeft = game.rounds.length - (game.currentRoundIndex + 1);
+  const isSameTime = Number(prevRoundTimeDiff.toFixed(1)) === 0;
+  const hasToCheerUp = !isSameTime && prevRoundTimeDiff < 0 && game.prevRound;
 
   const onPressNextRound = () => {
     if (game.nextRound()) {
@@ -32,7 +34,7 @@ export const GameRoundDoneScreen: React.FC = () => {
 
   const getMessage = () => {
     if (game.prevRound) {
-      if (Math.abs(prevRoundTimeDiff) <= 0.01) {
+      if (isSameTime) {
         return `이전 기록과 같은 시간이에요.`;
       } else if (prevRoundTimeDiff < 0) {
         return `이전 기록보다 ${-prevRoundTimeDiff.toFixed(1)}초 늦어졌어요.`;
@@ -47,9 +49,12 @@ export const GameRoundDoneScreen: React.FC = () => {
   return (
     <PageLayout hasGoBackIcon={false}>
       <S.GameRoundDoneContainer>
-        <Image source={ClappingHandsGIF} style={{ width: 160, height: 160 }} />
+        <Image
+          source={hasToCheerUp ? CheerUpGIF : ClappingHandsGIF}
+          style={{ width: 160, height: 160 }}
+        />
         <Text size={30} font="bold">
-          잘 하셨습니다!
+          {hasToCheerUp ? '조금 더 힘내세요!' : '잘 하셨습니다!'}
         </Text>
         <Text size={20} font="regular" color="gray">
           {getMessage()}

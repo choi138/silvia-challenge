@@ -38,7 +38,7 @@ export const ProgressBarWrapper = styled.View`
 
 export const ProgressBar = styled(View)<{ variant: ProgressBarVariant }>`
   height: 8px;
-  border-radius: 50%;
+  border-radius: 100px;
   ${(props) => variants[props.variant]}
 `;
 

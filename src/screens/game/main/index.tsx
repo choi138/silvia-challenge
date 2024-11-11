@@ -4,7 +4,7 @@ import { Image } from 'react-native';
 import { GameCircle, PageLayout, Text } from 'src/components';
 import { GameImage, useGameStore } from 'src/stores';
 import { useNavigate } from 'src/hooks';
-import { Format } from 'src/utils';
+import { Format, isAndroid } from 'src/utils';
 
 import * as S from './styled';
 
@@ -32,7 +32,7 @@ export const GameMainScreen: React.FC = () => {
 
   const [circles] = useState<CircleStateProp[]>(
     game.currentRound.images.map((image, index) => ({
-      top: Math.floor(Math.random() * 60),
+      top: Math.floor(Math.random() * (isAndroid ? 20 : 60)),
       left: Math.max(0, Math.floor(Math.random() * 60) - 35),
       image: image,
       index: index,

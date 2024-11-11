@@ -1,6 +1,8 @@
 import React from 'react';
 import { ViewProps } from 'react-native';
 
+import { isAndroid } from 'src/utils';
+
 import { Text } from '../Text';
 
 import * as S from './styled';
@@ -25,7 +27,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ progress, text, varian
   return (
     <S.ProgressBarContainer>
       <S.ProgressBarRow>
-        <Text font="regular" size={15} style={{ flex: 0.5 }} align="left">
+        <Text font="regular" size={15} style={{ flex: isAndroid ? 0.6 : 0.5 }} align="left">
           {text}
         </Text>
         <S.ProgressBarWrapper>

@@ -29,12 +29,12 @@ export const CircleWrapper = styled.View<{ hasImage?: boolean }>`
   padding: 4px;
   border-color: ${colors.circle.border};
   border-width: ${({ hasImage }) => (hasImage ? '0px' : '2px')};
-  border-radius: 50%;
+  border-radius: 100px;
 `;
 
 export const Circle = styled.View`
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: 100px;
   background-color: ${colors.circle.default};
 `;

@@ -99,6 +99,7 @@ export const HistoryScreen: React.FC = () => {
         )}
         keyExtractor={(item) => item.createdAt}
       />
+
       {histories.length === 0 && (
         <S.HistoryNotFoundContainer>
           <Image source={SadGIF} style={{ width: 160, height: 160 }} />

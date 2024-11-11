@@ -9,6 +9,7 @@ import { useGameStore } from 'src/stores';
 import { useNavigate } from 'src/hooks';
 import { Tag } from 'src/components/common/Tag';
 import { STORAGE_GAME_HISTORY_KEY } from 'src/constant/keys';
+import { Format } from 'src/utils';
 
 import * as S from './styled';
 
@@ -32,7 +33,6 @@ export const GameDoneScreen: React.FC = () => {
   const onPressSaveData = async () => {
     const data = await AsyncStorage.getItem(STORAGE_GAME_HISTORY_KEY);
     const parsedData = data ? JSON.parse(data) : [];
-    console.log(game.rounds[0].avgReactionTime, 'gam, rounds');
 
     await AsyncStorage.setItem(
       STORAGE_GAME_HISTORY_KEY,
@@ -51,11 +51,6 @@ export const GameDoneScreen: React.FC = () => {
     navigate('Main');
   };
 
-  /** number[] 배열을 { value: number; }[] 배열로 변환 */
-  const formattedReactionTimeList = game.reactionTimeList.map((time) => ({
-    value: Number(time.toFixed(1)),
-  }));
-
   return (
     <PageLayout hasGoBackIcon={false}>
       <S.GameDoneContainer>
@@ -69,7 +64,7 @@ export const GameDoneScreen: React.FC = () => {
           </Text>
         </S.GameResultHeaderContainer>
         <Chart
-          data={formattedReactionTimeList}
+          data={Format.list(game.reactionTimeList)}
           xLabelTexts={Array.from({ length: game.reactionTimeList.length }, (_, i) => `${i + 1}회`)}
           yLabelSuffix="초"
         />

@@ -22,7 +22,7 @@ export const Chart: React.FC<ChartProps> = ({ data, xLabelTexts, yLabelSuffix })
         showVerticalLines
         thickness={4}
         dataPointsColor={colors.primary}
-        horizontalRulesStyle={{ left: 10 }}
+        // horizontalRulesStyle={{ left: 10 }}
         width={deviceWidth - 100}
         height={140}
         isAnimated

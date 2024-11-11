@@ -4,7 +4,7 @@ import styled, { css, ReactNativeStyle } from '@emotion/native';
 
 import { colors } from 'src/styles';
 
-import { ButtonCustomProps, ButtonSize, ButtonVariant } from '.';
+import { ButtonCustomProps, ButtonSize } from '.';
 
 const sizes: Record<ButtonSize, ReactNativeStyle> = {
   large: css`
@@ -18,18 +18,12 @@ const sizes: Record<ButtonSize, ReactNativeStyle> = {
   `,
 };
 
-const variants: Record<ButtonVariant, ReactNativeStyle> = {
-  primary: css`
-    background-color: ${colors.primary.default};
-  `,
-};
-
 export const ButtonElement = styled(TouchableOpacity)<Required<ButtonCustomProps>>`
   align-items: center;
   justify-content: center;
   text-align: center;
   border-radius: 12px;
+  background-color: ${colors.button};
 
   ${(props) => sizes[props.size]}
-  ${(props) => variants[props.variant]}
 `;

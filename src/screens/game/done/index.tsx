@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { Button, PageLayout, Text } from 'src/components';
+import { Button, Chart, PageLayout, Text } from 'src/components';
 import { BrainGIF } from 'src/assets';
 import { useGameStore } from 'src/stores';
 import { useNavigate } from 'src/hooks';
@@ -22,7 +22,7 @@ export const GameDoneScreen: React.FC = () => {
   }
 
   /** 위험 여부 */
-  const isDanger = game.score < 50;
+  const isDanger = game.score < 0.5;
   /** 포맷팅한 평균 정확도 */
   const accuracy = (game.accuracy * 100).toFixed(0);
   /** 포맷팅한 평균 반응 시간 */
@@ -50,16 +50,28 @@ export const GameDoneScreen: React.FC = () => {
     navigate('Main');
   };
 
+  /** number[] 배열을 { value: number; }[] 배열로 변환 */
+  const formattedReactionTimeList = game.reactionTimeList.map((time) => ({
+    value: Number(time.toFixed(1)),
+  }));
+
   return (
     <PageLayout hasGoBackIcon={false}>
       <S.GameDoneContainer>
-        <Image source={BrainGIF} style={{ width: 160, height: 160 }} />
-        <Text size={30} fonts="bold">
-          검사가 끝났어요!
-        </Text>
-        <Text size={20} fonts="regular">
-          정확도 {accuracy}% / 평균 {avgReactionTime}초
-        </Text>
+        <S.GameResultHeaderContainer>
+          <Image source={BrainGIF} style={{ width: 160, height: 160 }} />
+          <Text size={30} fonts="bold">
+            검사가 끝났어요!
+          </Text>
+          <Text size={20} fonts="regular">
+            정확도 {accuracy}% / 평균 {avgReactionTime}초
+          </Text>
+        </S.GameResultHeaderContainer>
+        <Chart
+          data={formattedReactionTimeList}
+          xLabelTexts={Array.from({ length: game.reactionTimeList.length }, (_, i) => `${i + 1}회`)}
+          yLabelSuffix="초"
+        />
         <S.GameResultTextContainer>
           <Text size={20} fonts="regular">
             결과는

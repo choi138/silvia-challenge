@@ -17,6 +17,9 @@ const variants: Record<FontColor, ReactNativeStyle> = {
   link: css`
     color: ${colors.text.link};
   `,
+  darkGray: css`
+    color: ${colors.text.darkGray};
+  `,
 };
 
 const aligns: Record<FontAlign, ReactNativeStyle> = {

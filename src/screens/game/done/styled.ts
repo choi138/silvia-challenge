@@ -4,6 +4,12 @@ export const GameDoneContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+  row-gap: 50px;
+`;
+
+export const GameResultHeaderContainer = styled.View`
+  align-items: center;
+  justify-content: center;
   row-gap: 20px;
 `;
 

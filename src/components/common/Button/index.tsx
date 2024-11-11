@@ -6,12 +6,10 @@ import { Text } from '../Text';
 import * as S from './styled';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonVariant = 'primary';
 export type ButtonWidth = '50%' | '100%' | 'auto';
 
 export interface ButtonCustomProps {
   size?: ButtonSize;
-  variant?: ButtonVariant;
   width?: ButtonWidth;
 }
 
@@ -25,16 +23,9 @@ export type ButtonStyleProps = ButtonCustomProps & TouchableOpacityProps;
  * @param width 버튼 너비
  */
 const Button = React.forwardRef<TouchableOpacity, ButtonProps>(
-  ({ size = 'medium', variant = 'primary', width = 'auto', ...props }, ref) => {
+  ({ size = 'medium', width = 'auto', ...props }, ref) => {
     return (
-      <S.ButtonElement
-        ref={ref}
-        size={size}
-        variant={variant}
-        width={width}
-        {...props}
-        activeOpacity={0.8}
-      >
+      <S.ButtonElement ref={ref} size={size} width={width} {...props} activeOpacity={0.8}>
         <Text color="white" size={16}>
           {props.children}
         </Text>

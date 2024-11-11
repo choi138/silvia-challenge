@@ -6,7 +6,7 @@ import { CarrotPNG, ChessPNG, FeatherPNG, GamesPNG, PizzaPNG, UmbrellaPNG } from
 import { shuffleArray } from 'src/utils/suffle';
 
 export const GAME_STAGE_COUNT = 6;
-export const GAME_ROUND_COUNT = 2;
+export const GAME_ROUND_COUNT = 7;
 
 export class GameImage {
   src: ImageSourcePropType;
@@ -125,6 +125,10 @@ export class GameRound {
     this.currentStageIndex = props.currentStageIndex;
   }
 
+  /**
+   * 라운드 생성
+   * @returns 라운드
+   */
   static createRound(): GameRound {
     const images = GameImage.createImages(GAME_STAGE_COUNT);
 
@@ -201,6 +205,11 @@ export class GameStore {
   /** 게임 점수 */
   get score(): number {
     return this.rounds.reduce((acc, round) => acc + round.score, 0) / GAME_ROUND_COUNT;
+  }
+
+  /** 게임 점수 목록 */
+  get scoreList(): number[] {
+    return this.rounds.map((round) => round.score);
   }
 
   /**

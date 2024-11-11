@@ -1,9 +1,8 @@
 import styled from '@emotion/native';
 
-export const Header = styled.View`
-  align-items: flex-start;
-  row-gap: 10px;
-  margin-bottom: 20px;
+export const HistoryHeaderContainer = styled.View`
+  row-gap: 30px;
+  padding-bottom: 30px;
 `;
 
 export const HistoryNotFoundContainer = styled.View`
